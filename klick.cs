@@ -36,9 +36,18 @@ public class klick : MonoBehaviour
         {
             telefon.SetActive(false);
         }
+        else
+        {
+            if (PlayerPrefs.HasKey("telefon"))
+            {
+                telefon.SetActive(true);
+                PlayerPrefs.SetInt("telefon", 1);
+            }
+               
+        }
         if(telefo == 1 && PlayerPrefs.HasKey("telefon1"))
         {
-            telefon.SetActive(true);
+            //telefon.SetActive(true);
             telefo = 0;
             PlayerPrefs.SetInt("telefo", telefo);
         }
@@ -64,6 +73,7 @@ public class klick : MonoBehaviour
         mikroo.SetActive(true);
         telefon.SetActive(true);
         PlayerPrefs.SetInt("telefon1", 1);
+        PlayerPrefs.SetInt("telefon", 0);
         telefo = 0;
         PlayerPrefs.SetInt("telefo", telefo);
      
