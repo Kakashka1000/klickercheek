@@ -32,7 +32,7 @@ public class klick : MonoBehaviour
 
         rotik = true;
 
-        if (PlayerPrefs.HasKey("telefon"))
+        if (PlayerPrefs.HasKey("telefon") && PlayerPrefs.GetInt("telefon") == 0)
         {
             telefon.SetActive(false);
         }
@@ -101,7 +101,7 @@ public class klick : MonoBehaviour
             money -= 50;
             telefon.SetActive(false);
             telefonest = true;
-            PlayerPrefs.SetInt("telefon", 0);
+            PlayerPrefs.SetInt("telefon", 1);
             telefo = 0;
         }
     }
