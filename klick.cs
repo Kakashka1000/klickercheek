@@ -13,12 +13,21 @@ public class klick : MonoBehaviour
     public GameObject mikroo;
     public GameObject panel;
     bool isopened;
+    bool isopened2;
     public GameObject cameraa;
     public GameObject telefon;
-    private bool telefonys;
+    public GameObject nenada;
 
     public GameObject Faq;
     private bool rotik;
+    public GameObject panel2;
+
+    public GameObject sveta;
+    public GameObject noyt;
+    public GameObject vetrozachita;
+
+    private bool telefonys;
+    private bool level1 = false;
 
     private void Start()
     {
@@ -73,6 +82,18 @@ public class klick : MonoBehaviour
                 PlayerPrefs.SetInt("camera", 1);
             }
         }
+        if (PlayerPrefs.HasKey("veter") && PlayerPrefs.GetInt("veter") == 0)
+        {
+            vetrozachita.SetActive(false);
+        }
+        else
+        {
+            if (!PlayerPrefs.HasKey("veter"))
+            {
+                cameraa.SetActive(true);
+                PlayerPrefs.SetInt("veter", 1);
+            }
+        }
 
     }
     private void Awake()
@@ -94,12 +115,14 @@ public class klick : MonoBehaviour
         cameraa.SetActive(true);
         mikroo.SetActive(true);
         telefon.SetActive(true);
+        vetrozachita.SetActive(false);
         PlayerPrefs.SetInt("rate", rate);
         PlayerPrefs.SetInt("money", money);
         PlayerPrefs.SetInt("telefon", 1);
         PlayerPrefs.SetInt("camera", 1);
         PlayerPrefs.SetInt("mikro", 1);
         PlayerPrefs.SetInt("telefonys", 0);
+        PlayerPrefs.SetInt("veter", 0);
 
     }
     public void mikro()
@@ -120,6 +143,7 @@ public class klick : MonoBehaviour
     {
         isopened = !isopened;
         panel.SetActive(isopened);
+        nenada.SetActive(true);
     }
     public void camera1()
     {
@@ -147,6 +171,7 @@ public class klick : MonoBehaviour
     {
         panel.SetActive(false);
         Faq.SetActive(false);
+        nenada.SetActive(false);
     }
     public void fuckyou()
     {
@@ -170,5 +195,26 @@ public class klick : MonoBehaviour
             Application.Quit();
         }
     }
+    public void next()
+    {
+        isopened = !isopened;
+        isopened2 = !isopened2;
+        panel.SetActive(isopened);
+        panel2.SetActive(isopened2);
+    }
+    public void veter()
+    {
+        if (money >= 900 && telefonys == true)
+        {
+            rate = 3;
+            PlayerPrefs.SetInt("rate", rate);
+            vetrozachita.SetActive(false);
+            money -= 900;
+            PlayerPrefs.Save();
+            PlayerPrefs.SetInt("veter", 0);
+
+        }
+    }
+ 
 }
  
