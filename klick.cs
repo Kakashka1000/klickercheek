@@ -15,23 +15,28 @@ public class klick : MonoBehaviour
     bool isopened;
     public GameObject cameraa;
     public GameObject telefon;
-    bool telefonest = false;
+    private bool telefonys;
+
     public GameObject Faq;
     private bool rotik;
-
-    int telefonint;
-    int telefo = 0;
 
     private void Start()
     {
         money = PlayerPrefs.GetInt("money");
         rate = PlayerPrefs.GetInt("rate");
-        PlayerPrefs.GetInt("telefo");
-        telefonint = PlayerPrefs.GetInt("telefon1");
-        
 
         rotik = true;
-
+        if(PlayerPrefs.HasKey("telefonys") && PlayerPrefs.GetInt("telefonys") == 1)
+        {
+            telefonys = true;
+        }
+        else
+        {
+            if(PlayerPrefs.HasKey("telefonys") && PlayerPrefs.GetInt("telefonys") == 0)
+            {
+                telefonys = false;
+            }
+        }
         if (PlayerPrefs.HasKey("telefon") && PlayerPrefs.GetInt("telefon") == 0)
         {
             telefon.SetActive(false);
@@ -43,15 +48,32 @@ public class klick : MonoBehaviour
                 telefon.SetActive(true);
                 PlayerPrefs.SetInt("telefon", 1);
             }
-               
         }
-        if(telefo == 1 && PlayerPrefs.HasKey("telefon1"))
+        if (PlayerPrefs.HasKey("mikro") && PlayerPrefs.GetInt("mikro") == 0)
         {
-            //telefon.SetActive(true);
-            telefo = 0;
-            PlayerPrefs.SetInt("telefo", telefo);
+            mikroo.SetActive(false);
         }
-        
+        else
+        {
+            if (!PlayerPrefs.HasKey("mikro"))
+            {
+                mikroo.SetActive(true);
+                PlayerPrefs.SetInt("mikro", 1);
+            }
+        }
+        if (PlayerPrefs.HasKey("camera") && PlayerPrefs.GetInt("camera") == 0)
+        {
+            cameraa.SetActive(false);
+        }
+        else
+        {
+            if (!PlayerPrefs.HasKey("camera"))
+            {
+                cameraa.SetActive(true);
+                PlayerPrefs.SetInt("camera", 1);
+            }
+        }
+
     }
     private void Awake()
     {
@@ -72,21 +94,26 @@ public class klick : MonoBehaviour
         cameraa.SetActive(true);
         mikroo.SetActive(true);
         telefon.SetActive(true);
-        PlayerPrefs.SetInt("telefon1", 1);
+        PlayerPrefs.SetInt("rate", rate);
+        PlayerPrefs.SetInt("money", money);
         PlayerPrefs.SetInt("telefon", 1);
-        telefo = 0;
-        PlayerPrefs.SetInt("telefo", telefo);
-     
+        PlayerPrefs.SetInt("camera", 1);
+        PlayerPrefs.SetInt("mikro", 1);
+        PlayerPrefs.SetInt("telefonys", 0);
+
     }
     public void mikro()
     {
-        if (money >= 350 && telefonest == true)
+        if (money >= 350 && telefonys == true)
         {
-            rate = 2;
+            
             money -= 350;
-            PlayerPrefs.SetInt("rate", rate);
             PlayerPrefs.SetInt("money", money);
             mikroo.SetActive(false);
+            PlayerPrefs.SetInt("mikro", 0);
+            rate = 2;
+            PlayerPrefs.SetInt("rate", rate);
+            
         }
     }
     public void Panell()
@@ -96,12 +123,13 @@ public class klick : MonoBehaviour
     }
     public void camera1()
     {
-        if (money >= 800 && telefonest == true){
+        if (money >= 800 && telefonys == true){
             rate = 3;
             PlayerPrefs.SetInt("rate", rate);
             cameraa.SetActive(false);
             money -= 800;
             PlayerPrefs.Save();
+            PlayerPrefs.SetInt("camera", 0);
         }
     }
     public void telefon1()
@@ -110,9 +138,9 @@ public class klick : MonoBehaviour
         {
             money -= 50;
             telefon.SetActive(false);
-            telefonest = true;
             PlayerPrefs.SetInt("telefon", 0);
-            telefo = 0;
+            telefonys = true;
+            PlayerPrefs.SetInt("telefonys", 1);
         }
     }
     public void krestik()
