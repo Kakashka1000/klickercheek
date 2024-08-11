@@ -329,8 +329,20 @@ public class klick : MonoBehaviour
         magic = (UnityEngine.Random.Range(0, 2) == 0);
         kaziktext.text = magic.ToString();
     }
-    
-   
-    
-    
+    public void kazik1(int kakaint)
+    {
+        if(kakaint >= money)
+        {
+            kazikrandom();
+            if(magic == true)
+            {
+                money += kakaint;
+            }
+            if(magic == false)
+            {
+                money -= kakaint;
+            }
+        }
+    }
+
 }
