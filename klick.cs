@@ -4,6 +4,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using JetBrains.Annotations;
 using UnityEngine.U2D.Animation;
+using System;
+using UnityEditor;
+using TMPro;
 
 public class klick : MonoBehaviour
 {
@@ -31,6 +34,12 @@ public class klick : MonoBehaviour
 
     public GameObject pomidor;
 
+    public GameObject kazikpanel;
+    public Text kaziktext;
+    private int kakashhhka;
+    private int kakaint;
+    bool magic;
+
 
     private void Start()
     {
@@ -49,7 +58,7 @@ public class klick : MonoBehaviour
                 telefonys = false;
             }
         }
-        if(PlayerPrefs.HasKey("level") && PlayerPrefs.GetInt("level") == 1)
+        if (PlayerPrefs.HasKey("level") && PlayerPrefs.GetInt("level") == 1)
         {
             level1 = true;
         }
@@ -149,7 +158,7 @@ public class klick : MonoBehaviour
     void Update()
     {
         anime.text = money.ToString();
-        if(PlayerPrefs.GetInt("camera") == 0 && PlayerPrefs.GetInt("mikro") == 0)
+        if (PlayerPrefs.GetInt("camera") == 0 && PlayerPrefs.GetInt("mikro") == 0)
         {
             level1 = true;
             PlayerPrefs.SetInt("level", 1);
@@ -285,12 +294,12 @@ public class klick : MonoBehaviour
             PlayerPrefs.SetInt("money", money);
 
         }
-        if(level1 == false && money>= 3000)
+        if (level1 == false && money >= 3000)
         {
-        
+
             pomidor.SetActive(true);
         }
-        
+
     }
     public void svet()
     {
@@ -309,5 +318,19 @@ public class klick : MonoBehaviour
     public void krestik2()
     {
         pomidor.SetActive(false);
+        kazikpanel.SetActive(false);
     }
+    public void kazik()
+    {
+        kazikpanel.SetActive(true);
+    }
+    public void kazikrandom()
+    {
+        magic = (UnityEngine.Random.Range(0, 2) == 0);
+        kaziktext.text = magic.ToString();
+    }
+    
+   
+    
+    
 }
