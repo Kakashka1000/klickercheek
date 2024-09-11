@@ -36,7 +36,6 @@ public class klick : MonoBehaviour
 
     public GameObject kazikpanel;
     public Text kaziktext;
-    private int kakashhhka;
     private int kakaint;
     bool magic;
 
@@ -329,12 +328,21 @@ public class klick : MonoBehaviour
         magic = (UnityEngine.Random.Range(0, 2) == 0);
         kaziktext.text = magic.ToString();
     }
-    public void kazik1(int kakaint)
-    {
-        if(kakaint >= money)
+    
+    
+    public InputField inputField;
+
+        public void ConvertToInt()
         {
+            string inputValue = inputField.text;
+            kakaint = int.Parse(inputValue);
+
+        }
+   public void kazikkks()
+    {
+        if (money >= kakaint) {
             kazikrandom();
-            if(magic == true)
+            if (magic == true)
             {
                 money += kakaint;
             }
@@ -343,6 +351,7 @@ public class klick : MonoBehaviour
                 money -= kakaint;
             }
         }
+        
     }
-
+    
 }
